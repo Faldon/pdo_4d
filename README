@@ -1,7 +1,26 @@
 Installing PDO_4D
----------------
-
+-----------------
 4D is a registered trademark of 4D SAS
+
+IMPORTANT NOTICE
+================
+It seems, the native c module is broken on modern 64bit systems.
+The fetch methods generate SEGFAULTS on Debian 10 and Ubuntu 18.04 for the
+distribution default Php versions (and newer ones also).
+While it strangely does run on current Arch Linux x64 systems, it seems that
+only the x86-64 build (nearly all recent Linux desktop and server environments)
+are affected.
+If you encounter this problem you can try the native php implementation found
+[here](https://github.com/faldon/DB4D.git)
+
+### Technical information for developers
+When debugging with Valgrind it occurs to me, that getting the column types
+as well as converting the field data to strings trigger the segmentation fault
+when using the memcpy function.
+This may be the reason why the code still works on non x86-64 platforms.
+I don't have access to 4D Databases anymore, so I am not able to debug and
+fix this error any further.
+
 
 BUILDING ON UNIX etc.
 =====================
